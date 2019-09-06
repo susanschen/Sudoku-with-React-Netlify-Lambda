@@ -7238,6 +7238,8 @@ postcss-focus-within@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/postcss-focus-within/-/postcss-focus-within-3.0.0.tgz#763b8788596cee9b874c999201cdde80659ef680"
   integrity sha512-W0APui8jQeBKbCGZudW37EeMCjDeVxKgiYfIIEo8Bdh5SpB9sxds/Iq8SEuzS0Q4YFOlG7EPFulbbxujpkrV2w==
+  dependencies:
+    postcss "^7.0.2"
 
 postcss-font-variant@^4.0.0:
   version "4.0.0"
@@ -9059,6 +9061,13 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
+sudoku@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/sudoku/-/sudoku-0.0.2.tgz#b1c82927ffabc0243ec76c212824c3f1f3e69034"
+  integrity sha1-scgpJ/+rwCQ+x2whKCTD8fPmkDQ=
+  dependencies:
+    underscore "= 1.1.6"
+
 supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
@@ -9386,6 +9395,11 @@ uglify-js@^3.1.4:
   dependencies:
     commander "~2.20.0"
     source-map "~0.6.1"
+
+"underscore@= 1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.1.6.tgz#6868da1bdd72d75285be0b4e50f228e70d001a2c"
+  integrity sha1-aGjaG91y11KFvgtOUPIo5w0AGiw=
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
