@@ -3,7 +3,7 @@ import SodukuField from './SudokuField';
 
 export default class SudokuBoard extends Component {
   render() {
-    const {sudoku} = this.props;
+    const {sudoku, onChange} = this.props;
     return (
       <div>
         {/* Quick test to display the generated Sudoku
@@ -13,7 +13,7 @@ export default class SudokuBoard extends Component {
         {sudoku.rows.map(row => (
           <div className="row" key={row.index}>
             {row.cols.map(field => (
-              <SodukuField field={field} key={field.col} />              
+              <SodukuField field={field} key={field.col} onChange={onChange} />              
             ))}              
           </div>
         ))}
