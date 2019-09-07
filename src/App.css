@@ -5,10 +5,23 @@
 .App-header {
   background-color: #282c34;
   padding: 2rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.field {
+  width: 3rem;
+  height: 3rem;
+  font-size: 2rem;
+  text-align: center;
+  color: #999;
+}
+
+.field[readonly] {
+  color: #333;
 }

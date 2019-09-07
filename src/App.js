@@ -25,12 +25,14 @@ function generateSudoku() {
   for (let i=0; i<9; i++) {
     const row = { index: i, cols: [] }
     for (let j=0; j<9; j++) {
-      const value = raw[i*9+j]
+      let value = raw[i*9+j]
+      // Change null to undefined to fix error message
+      value = value === null ? undefined : value
       const col = {
         row: i,
         col: j,
-        value: raw[i*9+j],
-        readonly: value !== null
+        value: value,
+        readonly: value !== undefined
       }
       row.cols.push(col)
     }
