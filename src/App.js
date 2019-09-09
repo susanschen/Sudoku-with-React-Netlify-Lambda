@@ -21,29 +21,33 @@ Returns an object with its initial sudoku state and solution
 function generateSudoku() {
   // Generate the puzzle and return an array of 81 values
   const raw = generator.makepuzzle()
-  console.log(raw)
+  const rawSolution = generator.solvepuzzle(raw)
 
+  // The generated puzzle values are from 0-8, add one to convert it to 1-9
+  const formattedRaw = raw.map(value => value === null ? "" : value+1)
+  const formattedSolution = rawSolution.map(value => value+1)
+  
   // Build an object from the array
-  const result = {rows: []}
+  const result = { 
+    rows: [], 
+    solution: formattedSolution
+  }
+  // Convert the flat array to a 2d array
   for (let i=0; i<9; i++) {
     const row = { index: i, cols: [] }
     for (let j=0; j<9; j++) {
-      let value = raw[i*9+j]
-      // Change null to empty string to fix error message
-      value = value === null ? "" : value
-      const col = {
+      let value = formattedRaw[i*9+j]
+
+      const cell = {
         row: i,
         col: j,
         value: value,
         readonly: value !== ""
       }
-      row.cols.push(col)
+      row.cols.push(cell)
     }
     result.rows.push(row)
   }
-
-  // Get the solution for the generated puzzle
-  result.solution = generator.solvepuzzle(raw);
 
   // Return the generated puzzle and its solution
   return result;
