@@ -30,7 +30,9 @@ function generateSudoku() {
   // Build an object from the array
   const result = { 
     rows: [], 
-    solution: formattedSolution
+    solution: formattedSolution,
+    startTime: new Date(),
+    solvedTime: null
   }
   // Convert the flat array to a 2d array
   for (let i=0; i<9; i++) {
@@ -50,7 +52,20 @@ function generateSudoku() {
   }
 
   // Return the generated puzzle and its solution
-  return result;
+  return result
+}
+
+// Check if the user entered correct values for the cells
+function checkSolution(sudoku) {  
+  // convert 2d array to flat array
+  const candidate = sudoku.rows
+    .map(row => row.cols.map(col => col.value))
+    .flat()   
+  
+  for(let i=0; i<candidate.length; i++) {
+    if(candidate[i] === "" || candidate[i] !== sudoku.solution[i]) return false
+  } 
+  return true
 }
 
 class App extends Component {
@@ -84,8 +99,17 @@ class App extends Component {
       //  Only edit the one field (sudoku square) that the user clicked on
       //  instead of updating the entire sudoku object with a nested for-loop
       // produce() returns the updated sudoku object
+      // note: if user enters the same number, then there is no update to state
       produce(state => {
-        state.sudoku.rows[e.row].cols[e.col].value = e.value
+        // update state to new input value. (convert string to number)
+        state.sudoku.rows[e.row].cols[e.col].value = parseInt(e.value,10)
+
+        // Did user solve the puzzle?
+        if ( !state.sudoku.solvedTime ) {
+          const solved = checkSolution(state.sudoku)  
+          if (solved)
+            state.sudoku.solvedTime = new Date();          
+        }
       })
     )
   }
@@ -94,13 +118,10 @@ class App extends Component {
     this.setState(
       produce(state=> {
         state.sudoku.rows.forEach(row => row.cols.forEach(col => {
-          // For each value that is not a readonly, get the solution
-          if(!col.readonly) {
-            col.value = state.sudoku.solution[ col.row * 9 + col.col]
-          }
+          col.value = state.sudoku.solution[ col.row * 9 + col.col]
         }))
       })
-    )
+    )    
   }
 
   render() {

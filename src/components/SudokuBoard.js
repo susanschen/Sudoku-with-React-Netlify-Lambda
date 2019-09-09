@@ -9,6 +9,7 @@ export default class SudokuBoard extends Component {
         {/* Quick test to display the generated Sudoku
          {JSON.stringify(this.props.sudoku)} 
         */}
+        { sudoku.solvedTime && <h2>You solved the Sudoku! </h2> }
 
         {sudoku.rows.map(row => (
           <div className="row" key={row.index}>

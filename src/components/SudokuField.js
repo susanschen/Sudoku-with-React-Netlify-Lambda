@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 
 export default class SodukuField extends Component {
-  handleChange = e=> {
-    // Convert string to number
-    const value = parseInt(e.target.value, 10)
-    // Only accept number less than 10 as inputs
-    if(!isNaN(value)) {
-      if(value<10) {
-        this.props.onChange({...this.props.field, value: e.target.value})
-      }
-    }
+  handleChange = e=> {   
+    const value = e.target.value
 
+     // Only accept number less than 10 as inputs
+    if(!isNaN(value) && value<10) {
+        this.props.onChange({...this.props.field, value: value})
+    }
   }
 
   render() {
