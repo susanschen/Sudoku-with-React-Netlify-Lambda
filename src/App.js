@@ -7,22 +7,24 @@ import SudokuBoard from "./components/SudokuBoard";
 window.generator = generator;
 
 /*
-Generates a sudoku with the structure
-{rows: 
+Returns an object with its initial sudoku state and solution
+{rows:  // 9 rows
   [ 
     {
-      index: 0, 
-      cols: [{row:0, col:0, value:1, readonly:true}, ...]
+      index: 0-8,  // row index
+      cols: [{row:0-8, col:0-8, value:1-9, readonly:boolean}, ...]  // 9 columns
     }, 
     ...
   ]
 }
 */
 function generateSudoku() {
+  // Generate the puzzle and return an array of 81 values
   const raw = generator.makepuzzle()
   console.log(raw)
-  const result = {rows: []}
 
+  // Build an object from the array
+  const result = {rows: []}
   for (let i=0; i<9; i++) {
     const row = { index: i, cols: [] }
     for (let j=0; j<9; j++) {
@@ -40,6 +42,10 @@ function generateSudoku() {
     result.rows.push(row)
   }
 
+  // Get the solution for the generated puzzle
+  result.solution = generator.solvepuzzle(raw);
+
+  // Return the generated puzzle and its solution
   return result;
 }
 
@@ -80,6 +86,19 @@ class App extends Component {
     )
   }
 
+  getSolution = e => {
+    this.setState(
+      produce(state=> {
+        state.sudoku.rows.forEach(row => row.cols.forEach(col => {
+          // For each value that is not a readonly, get the solution
+          if(!col.readonly) {
+            col.value = state.sudoku.solution[ col.row * 9 + col.col]
+          }
+        }))
+      })
+    )
+  }
+
   render() {
     return (
       <div className="App">
@@ -88,6 +107,7 @@ class App extends Component {
           </p>
         </header>
         <SudokuBoard sudoku={this.state.sudoku} onChange={this.handleChange}/>
+        <button onClick={this.getSolution}>Show Solution</button>
       </div>
     )
   }
