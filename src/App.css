@@ -1,3 +1,7 @@
+.root {
+  --board-size: 500px;
+}
+
 .App {
   text-align: center;
 }
@@ -14,10 +18,31 @@
   color: white;
 }
 
+.board {
+  max-width: 500px;
+  max-height: 500px;
+  margin: 0 auto;
+  border-bottom: 5px solid #333;
+  border-right: 5px solid #333;
+}
+
+input {
+  outline: none;
+  border: 1px solid #555;
+}
+
+.third-row {
+  border-top: 5px solid #333;
+}
+
+.third-column {
+  border-left: 5px solid #333;
+}
+
 .field {
-  width: 3rem;
-  height: 3rem;
-  font-size: 2rem;
+  max-width: calc(500px/10);
+  max-height: calc(500px/10);
+  font-size: 2.5rem;
   text-align: center;
   color: #999;
 }

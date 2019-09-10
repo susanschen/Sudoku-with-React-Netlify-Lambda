@@ -14,14 +14,17 @@ export default class SudokuBoard extends Component {
         { sudoku.solvedTime ? <Result sudoku={sudoku} /> 
           : <Timer start={sudoku.startTime} /> 
         }
-
-        {sudoku.rows.map(row => (
-          <div className="row" key={row.index}>
-            {row.cols.map(field => (
-              <SodukuField field={field} key={field.col} onChange={onChange} />              
-            ))}              
-          </div>
-        ))}
+        
+        <div className="board">
+          {sudoku.rows.map(row => (
+            <div className={row.index%3 === 0 ? "third-row row" : "row"} key={row.index}>
+              {row.cols.map(field => (
+                <SodukuField field={field} key={field.col} onChange={onChange} />              
+              ))}              
+            </div>
+          ))}
+        </div>
+       
       </div>
     )
   }

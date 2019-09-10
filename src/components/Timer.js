@@ -24,6 +24,6 @@ export default class SodukuField extends Component {
 
   render() {
     const {elapsed} = this.state;
-    return <h2>Time: {elapsed}</h2>
+    return <h2>Time: {elapsed} seconds</h2>
   }
 }
